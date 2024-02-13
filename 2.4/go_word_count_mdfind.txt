@@ -1,0 +1,6 @@
+      11      12     159 /Users/tokuyamamorimasa/Desktop/OS/2.1/e225724-go-filewrite2/main.go
+      41      99     777 /Users/tokuyamamorimasa/Desktop/OS/2.1/e225724-go-filewrite2/main_test.go
+     120     354    3452 /Users/tokuyamamorimasa/Desktop/OS/2.2/e225724-filewrite/main.go
+      58     141    1006 /Users/tokuyamamorimasa/Desktop/OS/2.1/e225724-go-filewrite2/fileIO/fileIO.go
+       8      38     276 /Users/tokuyamamorimasa/Desktop/OS/2.1/e225724-go-filewrite2/fileWrite/fileWrite.go
+     238     644    5670 total

@@ -1,0 +1,30 @@
+df command
+
+自分のPCの実行結果
+$ cd ~ 
+$ df .
+Filesystem   512-blocks      Used Available Capacity iused     ifree %iused  Mounted on
+/dev/disk3s5  478724992 381392592  57488256    87% 1778409 287441280    1%   /System/Volumes/Data
+
+amane上の実行結果
+$ ssh amane
+$ df .
+Filesystem                                                     1K-blocks        Used   Available Use% Mounted on
+10.100.0.20:6789,10.100.0.30:6789,10.100.0.40:6789:/ie-home/ 37281439744 21957595136 15323844608  59% /home
+
+vm上での実行結果
+$ ssh fedora39
+$ df .
+Filesystem              1K-blocks    Used Available Use% Mounted on
+/dev/mapper/fedora-root  15663104 2010880  13652224  13% /
+
+
+lsofcommand
+自分のノートPCとamane上でlsolコマンドを実行しました。
+自分のPCが開いているファイル数は12238個
+amane上で開いているファイル数は10167個
+
+使用したシェルファイルと実行結果のファイルを二つずつ添付します。
+
+
+

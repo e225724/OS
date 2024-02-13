@@ -1,0 +1,13 @@
+Explain why doubling the speed of the systems on an Ethernet segment may result in decreased network performance when the UDP transport protocol is used. What changes could help solve this problem?
+
+
+UDPの構造はシンプルであるが、信頼性が低く、エラー訂正や再送処理がないため、パケットが順番通りに届かない可能性がある。そのため、システムの速度を2倍にすることで、 パケットの競合や損失がより頻繁に発生する可能性があり、ネットワークパフォーマンスが低下する可能性がある。
+
+問題を解決するために、確認応答やウィンドウ制御を利用し、信頼性の高い接続であり、パケットの順序や損失を対処する能力を持つTCPを使用することが考えられる。
+
+また、UDPにパケットの再送の実装やフロー制御の最適化などを行うことで、UDPのネットワークパフォーマンスが向上できると考えられる。
+
+
+
+
+

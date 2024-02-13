@@ -1,0 +1,191 @@
+
+WWW server
+$ sudo systemctl start nginx
+[sudo] password for tokuyamamorimasa: 
+$ ls -l /proc | grep nginx
+dr-xr-xr-x.  9 nginx            nginx                          0 Feb  5 02:25 1891
+dr-xr-xr-x.  9 nginx            nginx                          0 Feb  5 02:25 1892
+
+$ sudo ls -l /proc/1891/fd
+total 0
+lrwx------. 1 nginx nginx 64 Feb  5 02:27 0 -> /dev/null
+lrwx------. 1 nginx nginx 64 Feb  5 02:27 1 -> /dev/null
+lrwx------. 1 nginx nginx 64 Feb  5 02:27 10 -> 'socket:[28446]'
+lrwx------. 1 nginx nginx 64 Feb  5 02:27 11 -> 'anon_inode:[eventpoll]'
+lrwx------. 1 nginx nginx 64 Feb  5 02:27 12 -> 'anon_inode:[eventfd]'
+lrwx------. 1 nginx nginx 64 Feb  5 02:27 13 -> 'anon_inode:[eventfd]'
+l-wx------. 1 nginx nginx 64 Feb  5 02:27 2 -> /var/log/nginx/error.log
+lr-x------. 1 nginx nginx 64 Feb  5 02:27 3 -> 'pipe:[29777]'
+l-wx------. 1 nginx nginx 64 Feb  5 02:27 4 -> 'pipe:[29777]'
+lrwx------. 1 nginx nginx 64 Feb  5 02:27 5 -> 'socket:[29780]'
+l-wx------. 1 nginx nginx 64 Feb  5 02:27 6 -> /var/log/nginx/error.log
+l-wx------. 1 nginx nginx 64 Feb  5 02:27 7 -> /var/log/nginx/access.log
+lrwx------. 1 nginx nginx 64 Feb  5 02:27 8 -> 'socket:[29778]'
+lrwx------. 1 nginx nginx 64 Feb  5 02:27 9 -> 'socket:[29779]'
+
+$ sudo ls -l /proc/1892/fd
+total 0
+lrwx------. 1 nginx nginx 64 Feb  5 02:27 0 -> /dev/null
+lrwx------. 1 nginx nginx 64 Feb  5 02:27 1 -> /dev/null
+lrwx------. 1 nginx nginx 64 Feb  5 02:27 12 -> 'socket:[29781]'
+lrwx------. 1 nginx nginx 64 Feb  5 02:27 13 -> 'anon_inode:[eventpoll]'
+lrwx------. 1 nginx nginx 64 Feb  5 02:27 14 -> 'anon_inode:[eventfd]'
+lrwx------. 1 nginx nginx 64 Feb  5 02:27 15 -> 'anon_inode:[eventfd]'
+l-wx------. 1 nginx nginx 64 Feb  5 02:27 2 -> /var/log/nginx/error.log
+lr-x------. 1 nginx nginx 64 Feb  5 02:27 3 -> 'pipe:[29777]'
+l-wx------. 1 nginx nginx 64 Feb  5 02:27 4 -> 'pipe:[29777]'
+lrwx------. 1 nginx nginx 64 Feb  5 02:27 5 -> 'socket:[28445]'
+l-wx------. 1 nginx nginx 64 Feb  5 02:27 6 -> /var/log/nginx/error.log
+l-wx------. 1 nginx nginx 64 Feb  5 02:27 7 -> /var/log/nginx/access.log
+lrwx------. 1 nginx nginx 64 Feb  5 02:27 8 -> 'socket:[29778]'
+lrwx------. 1 nginx nginx 64 Feb  5 02:27 9 -> 'socket:[29779]'
+
+それぞれのファイルについて
+/dev/null
+読み込み専用のファイルであり、空の結果が得られる。
+
+socket:[xxxxx]
+xxxxxはソケット識別子であり、ソケットを介して、プロセスが他のプロセスやサービスと通信を行っている。
+
+anon_inode:[eventpoll]
+非同期イベントのポーリングを行うメカニズムを提供し、イベントを効率的に監視する。
+
+anon_inode:[eventfd]
+非同期イベントの通知に使用されるメカニズム
+
+pipe:[xxxxx]
+xxxxxはパイプ識別子であり、一方のプロセスから別のプロセスにデータを転送させる。
+
+/var/log/nginx/error.log
+Nginxウェブサーバーが発生したエラーメッセージや警告などに関する情報を記録するログファイルである。
+
+/var/log/nginx/access.log
+Nginxウェブサーバーが受けたHTTPリクエストに関するアクセスログを記録するためのログファイルである。
+
+
+
+
+
+Database Server
+$ ps aux | grep mariadb
+mysql       3037  0.1  0.9 1346848 80340 ?       Ssl  02:33   0:00 /usr/libexecmariadbd --basedir=/usr
+tokuyam+    3143  0.0  0.0   6768  2176 pts/0    S+   02:34   0:00 grep --color=auto mariadb
+$ ls -l /proc/3037/fd/
+ls: cannot open directory '/proc/3037/fd/': Permission denied
+[tokuyamamorimasa@localhost ~]$ sudo ls -l /proc/3037/fd/
+total 0
+lr-x------. 1 mysql mysql 64 Feb  5 02:36 0 -> /dev/null
+l-wx------. 1 mysql mysql 64 Feb  5 02:36 1 -> /var/log/mariadb/mariadb.log
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 10 -> /var/lib/mysql/ibdata1
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 11 -> '/var/tmp/#17284251 (deleted)'
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 12 -> /var/lib/mysql/ibtmp1
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 13 -> /var/lib/mysql/mysql/servers.MAI
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 14 -> /var/lib/mysql/mysql/servers.MAD
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 15 -> /var/lib/mysql/mysql/innodb_index_stats.ibd
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 16 -> /var/lib/mysql/mysql/innodb_table_stats.ibd
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 17 -> /var/lib/mysql/mysql/transaction_registry.ibd
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 18 -> /var/lib/mysql/mysql/gtid_slave_pos.ibd
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 19 -> 'socket:[33971]'
+l-wx------. 1 mysql mysql 64 Feb  5 02:36 2 -> /var/log/mariadb/mariadb.log
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 20 -> 'socket:[33972]'
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 21 -> /var/lib/mysql/mysql/db.MAI
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 22 -> /var/lib/mysql/mysql/db.MAD
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 23 -> /var/lib/mysql/mysql/proxies_priv.MAI
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 24 -> /var/lib/mysql/mysql/proxies_priv.MAD
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 25 -> /var/lib/mysql/mysql/roles_mapping.MAI
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 26 -> /var/lib/mysql/mysql/roles_mapping.MAD
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 27 -> /var/lib/mysql/mysql/global_priv.MAI
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 28 -> /var/lib/mysql/mysql/global_priv.MAD
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 29 -> /var/lib/mysql/mysql/tables_priv.MAI
+lrwx------. 1 mysql mysql 64 Feb  5 02:33 3 -> /var/lib/mysql/aria_log_control
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 30 -> /var/lib/mysql/mysql/tables_priv.MAD
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 31 -> /var/lib/mysql/mysql/columns_priv.MAI
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 32 -> /var/lib/mysql/mysql/columns_priv.MAD
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 33 -> /var/lib/mysql/mysql/procs_priv.MAI
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 34 -> /var/lib/mysql/mysql/procs_priv.MAD
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 35 -> /var/lib/mysql/mysql/event.MAI
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 36 -> /var/lib/mysql/mysql/event.MAD
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 37 -> /var/lib/mysql/multi-master.info
+lr-x------. 1 mysql mysql 64 Feb  5 02:33 4 -> /var/lib/mysql
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 5 -> /var/lib/mysql/aria_log.00000001
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 6 -> '/var/tmp/#17284248 (deleted)'
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 7 -> '/var/tmp/#17284249 (deleted)'
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 8 -> '/var/tmp/#17284250 (deleted)'
+lrwx------. 1 mysql mysql 64 Feb  5 02:36 9 -> /var/lib/mysql/ib_logfile0
+
+それぞれのファイルについて
+/dev/null、socket:[xxxxx]
+Nginxで調べたため省略する。
+
+/var/log/mariadb/mariadb.log
+データベースサーバーの動作やエラーに関する情報を記録するためのログファイルである。
+
+/var/lib/mysql/ibdata1
+InnoDBストレージエンジンでデータとメタデータを格納するファイルであり、データベースのテーブルデータ、インデックス、トラザクションログを保存する。
+
+/var/tmp/#xxxxxxxx (deleted)
+削除されたファイルを一時的に保存するファイルである。
+
+/var/lib/mysql/ibtmp1
+InnoDBストレージエンジンで一次的なテーブルデータやその他の一次的なオブジェクトを格納する一時表領域のファイルである。
+
+/var/lib/mysql/mysql/servers.MAI、/var/lib/mysql/mysql/servers.MAD
+MyISAMテーブルのサーバーのデータを扱い、MAIはメタデータやインデックス情報を、 MADはテーブルのデータを保持する。
+
+/var/lib/mysql/mysql/innodb_index_stats.ibd
+InnoDBストレージエンジンが使用するインデックスの統計情報を格納する。
+
+/var/lib/mysql/mysql/innodb_table_stats.ibd
+InnoDBストレージエンジンが使用するテーブルの統計情報を格納する。
+
+/var/lib/mysql/mysql/transaction_registry.ibd
+InnoDBストレージエンジンで使用するトラザクションの情報を格納する。
+
+/var/lib/mysql/mysql/gtid_slave_pos.ibd
+InnoDBストレージエンジンで使用するGTIDベースのレプリケーションにおけるスレーブの一情報を格納する。
+複数のサーバー間でのデータ同期やレプリケーションを管理するための識別子である。
+
+/var/log/mariadb/mariadb.log
+MariaDBサーバーの動作やエラーに関する情報を記録するログファイルである。
+
+/var/lib/mysql/mysql/db.MAI、/var/lib/mysql/mysql/db.MAD
+MyISAMテーブルのデータを扱い、MAIはインデックやメタデータを、MADはテーブルのデータを保持する。
+
+/var/lib/mysql/mysql/proxies_priv.MAI、/var/lib/mysql/mysql/proxies_priv.MAD
+MySQLデータベースへのアクセスに関連するプロキシアカウント情報を扱い、MAIはインデックスを、MADはテーブルデータを格納する。
+
+/var/lib/mysql/mysql/roles_mapping.MAI、/var/lib/mysql/mysql/roles_mapping.MAD
+MySQLデータベース内でのロールマッピング情報を管理を行い、MAIはインデックス情報を、MADはテーブルデータを扱う。
+
+/var/lib/mysql/mysql/global_priv.MAI、/var/lib/mysql/mysql/global_priv.MAD
+MySQLデータベース内でのグローバル特権に関する情報を管理を行い、MAIはインデックス情報を、MADはテーブルデータを扱う。
+
+/var/lib/mysql/mysql/tables_priv.MAI、/var/lib/mysql/mysql/tables_priv.MAD
+MySQLデータベース内でテーブルに関する権限情報を管理を行い、MAIはインデックス情報を、MAIはテーブルデータを扱う。
+
+/var/lib/mysql/aria_log_control
+MariaDBにおいて、Ariaストレージエンジンのログ制御に関連する情報を管理するためのファイルである。
+
+/var/lib/mysql/mysql/columns_priv.MAI、/var/lib/mysql/mysql/columns_priv.MAD
+MySQLデータベース内で列に対する特権の情報を管理を行い、MAIはインデックス情報を、MADはテーブルデータを扱う。
+
+/var/lib/mysql/mysql/procs_priv.MAI、/var/lib/mysql/mysql/procs_priv.MAD
+MySQLデータベース内でのプロシージャに関する特権情報の管理を行い、MAIはインデックス情報を、MADはテーブルデータを扱う。
+プロシージャとは、データベース内で再利用可能な一連のSQLステートメントおよび制御フローを含むデータベースオブジェクトである。
+
+/var/lib/mysql/mysql/event.MAI、/var/lib/mysql/mysql/event.MAD
+MySQLデータベース内でのイベントに関する情報の管理を行い、MAIはインデックス情報を、MADはテーブルデータを扱う。
+
+/var/lib/mysql/multi-master.info
+MySQLマルチマスターレプリケーションに関する情報を格納するファイルである。
+マルチマスターレプリケーションとは、複数のMySQLサーバーが互いにマスターとなり、相互にデータの同期を行うことである。
+
+/var/lib/mysql
+MySQLデータベースシステムがデータを格納するためのデフォルトのディレクトリである。
+
+/var/lib/mysql/aria_log.00000001
+Ariaストレージエンジンによって使用されるトランザクションログファイルであり、テーブルのデータや索引を管理する役割がある。
+
+/var/lib/mysql/ib_logfile0
+InnoDBストレージエンジンによって使用されるトランザクションログファイルであり、データの一貫性と耐久性を確保する役割がある。
+

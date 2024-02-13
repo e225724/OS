@@ -1,0 +1,34 @@
+$ cargo new hello_cargo
+$ cd hello_cargo
+でファイルを作成する。自分で作成を行わない
+
+
+(base) tokuyamanoMacBook-Air:hello_cargo tokuyamamorimasa$ cargo build
+   Compiling hello_cargo v0.1.0 (/Users/tokuyamamorimasa/Desktop/OS/6.1/mori/hello_cargo)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.83s
+(base) tokuyamanoMacBook-Air:hello_cargo tokuyamamorimasa$ ./target/debug/hello_cargo
+Hello, world!
+
+
+ファイルを指定しなくても、cargo runで実行可能
+(base) tokuyamanoMacBook-Air:hello_cargo tokuyamamorimasa$ cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/hello_cargo`
+Hello, world!
+
+$ cargo check
+   Checking hello_cargo v0.1.0 (file:///projects/hello_cargo)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.32 secs
+コードがコンパイルできるかを素早くチェックする実行ファイルは作成しない。
+
+
+cargo newを使ってプロジェクトを作成できる
+cargo buildを使ってプロジェクトをビルドできる
+cargo runを使うとプロジェクトのビルドと実行を1ステップで行える
+cargo checkを使うとバイナリを生成せずにプロジェクトをビルドして、エラーがないか確認できる
+Cargoは、ビルドの成果物をコードと同じディレクトリに保存するのではなく、target/debugディレクトリに格納する
+
+cargo updete
+最新のバージョンに変更することができる。
+
+

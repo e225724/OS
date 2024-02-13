@@ -1,0 +1,20 @@
+---
+- name: Install Nginx on Fedora
+  hosts: fedora39
+  become: yes
+
+  tasks:
+    - name: Update package cache
+      dnf:
+        update_cache: yes
+
+    - name: Install Nginx
+      dnf:
+        name: nginx
+        state: present
+
+    - name: Start Nginx service
+      systemd:
+        name: nginx
+        state: started
+        enabled: yes

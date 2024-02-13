@@ -1,0 +1,136 @@
+forkとはUnix系のオペレーティングシステムでプロセスを複製するためのシステムコールであり、使用すると呼び出し元のプロセスがほぼ完全なコピーを生成し、新しい子プロセスのメモリ内容、ファイルディスクリプタ、実行中のスレッドなど、多くのリソースを共有するが、独自のプロセスIDを持つ。
+
+forkを使用することで、新しいプロセスが別のプロセスと独立して実行され、並列処理やマルチタスクを実現することができる。forkの返り値によって、親プロセスと子プロセスの処理が分岐する返り値が0なら子プロセス、0ではない時は親プロセスを実行する。
+
+execシステムコールは、現在のプロセスを新しいプログラムに置き換える役割を果たし、execを呼び出すと、現在のプロセスのアドレス空間やプログラムイメージが新しいプログラムのものに切り替わる。
+
+
+
+
+
+ls ; ls ..のプログラムは授業資料のものを用いたので、省略する。また、シーケンス図を1.pdfで示します。
+
+ls ; ls .. ; ls ../..のプログラムを2.plに、シーケン図は2.pdfに示します。
+ls ; ls .. ; ls ../..の出力結果は
+$ ls ; ls .. ; ls ../..
+1.pdf           2.pdf           3-1.pl          3.pl            4.pdf           report.txt
+1.pl            2.pl            3.pdf           4-1.pl          4.pl            simple_sh.pl
+1:12.mov                                        3.3
+2.1                                             4.1
+2.2                                             :zshrcのファイルの中身.docx
+2.3                                             O S課題ログ.docx
+2.4                                             O S（注意が必要なもの）.docx
+2.5                                             OS課題 gitlab hugo使い方.docx
+2.6                                             hugo-template
+2.7                                             ~$ S課題ログ.docx
+2.8                                             課題1
+2.9                                             教科書
+3.2                                             講義動画
+1.md                                    人間と物理学
+2-4.sh                                  ソフトウェア開発
+Docker.dmg                              知能情報基礎演習4
+OS                                      情報ネットワークⅡ
+Screenshot                              知能情報基礎演習Ⅲ
+hug                                     知能情報基礎演習Ⅳ
+過去のtex                               データベースシステム
+人工知能                                名称未設定フォルダ
+人間関係論                              コンピュータアーキテクチャ
+
+2.plの出力結果は
+$ ./2.pl
+Parent 76703
+Child 76704
+1.pdf           2.pdf           3-1.pl          3.pl            4.pdf           report.txt
+1.pl            2.pl            3.pdf           4-1.pl          4.pl            simple_sh.pl
+Child end
+Parent 76703
+Child 76705
+1:12.mov                                        3.3
+2.1                                             4.1
+2.2                                             :zshrcのファイルの中身.docx
+2.3                                             O S課題ログ.docx
+2.4                                             O S（注意が必要なもの）.docx
+2.5                                             OS課題 gitlab hugo使い方.docx
+2.6                                             hugo-template
+2.7                                             ~$ S課題ログ.docx
+2.8                                             課題1
+2.9                                             教科書
+3.2                                             講義動画
+Child end
+Parent 76703
+Child 76706
+1.md                                    人間と物理学
+2-4.sh                                  ソフトウェア開発
+Docker.dmg                              知能情報基礎演習4
+OS                                      情報ネットワークⅡ
+Screenshot                              知能情報基礎演習Ⅲ
+hug                                     知能情報基礎演習Ⅳ
+過去のtex                               データベースシステム
+人工知能                                名称未設定フォルダ
+人間関係論                              コンピュータアーキテクチャ
+Child end
+
+
+ls ; ( ls & ls ../.. )のプログラムを3.plに、シーケンス図は3.pdfに示します。
+ls ; ( ls & ls ../.. )の出力結果
+$ ls ; ( ls & ls ../.. )
+1.pdf           2.pdf           3-1.pl          3.pl            4.pdf           report.txt
+1.pl            2.pl            3.pdf           4-1.pl          4.pl            simple_sh.pl
+1.pdf           2.pdf           3-1.pl          3.pl            4.pdf           report.txt
+1.pl            2.pl            3.pdf           4-1.pl          4.pl            simple_sh.pl
+1.md                                    人間と物理学
+2-4.sh                                  ソフトウェア開発
+Docker.dmg                              知能情報基礎演習4
+OS                                      情報ネットワークⅡ
+Screenshot                              知能情報基礎演習Ⅲ
+hug                                     知能情報基礎演習Ⅳ
+過去のtex                               データベースシステム
+人工知能                                名称未設定フォルダ
+人間関係論                              コンピュータアーキテクチャ
+
+3.plの出力結果
+$ ./3.pl
+Parent 76868 
+Child 76869
+1.pdf           2.pdf           3.pdf           4-1.pl          4.pl            simple_sh.pl
+1.pl            2.pl            3.pl            4.pdf           report.txt
+Child end
+Parent 76868
+Child 76870
+Parent 76868
+Child 76871
+1.pdf           2.pdf           3.pdf           4-1.pl          4.pl            simple_sh.pl
+1.pl            2.pl            3.pl            4.pdf           report.txt
+1.md                                    人間と物理学
+2-4.sh                                  ソフトウェア開発
+Docker.dmg                              知能情報基礎演習4
+OS                                      情報ネットワークⅡ
+Screenshot                              知能情報基礎演習Ⅲ
+hug                                     知能情報基礎演習Ⅳ
+過去のtex                               データベースシステム
+人工知能                                名称未設定フォルダ
+人間関係論                              コンピュータアーキテクチャ
+Both end
+
+
+ls ; ( ls | wc  )のプログラムを4.plに、シーケンス図は4.pdfに示します。
+ls ; ( ls | wc  )の出力結果
+$ ls ; ( ls | wc  )
+1.pdf           2.pdf           3.pdf           4-1.pl          4.pl            simple_sh.pl
+1.pl            2.pl            3.pl            4.pdf           report.txt
+      11      11      75
+
+4.plの出力結果
+$ ./4.pl
+Parent 76978
+Child 76979
+1.pdf           2.pdf           3.pdf           4-1.pl          4.pl            simple_sh.pl
+1.pl            2.pl            3.pl            4.pdf           report.txt
+Child end
+Parent 76978
+Child 76980
+      11      11      75
+Child end
+
+それぞれのそれぞれのスクリプトファイルとシーケンス図を添付いたします。
+

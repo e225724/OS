@@ -1,0 +1,41 @@
+gitlab での two factor authentication
+gitlabでの2段階認証の画像を添付してあります。
+
+password生成スクリプト
+pythonを用いてpasswordを作成した。プログラムは以下の通りである。
+
+import secrets
+import string
+
+def get_random_password_string(length):
+    pass_chars = string.ascii_letters + string.digits + string.punctuation
+    password = ''.join(secrets.choice(pass_chars) for x in range(length))
+    return password
+
+for _ in range(10):
+    print(get_random_password_string(15))
+
+
+出力結果を示す。
+-e.{<HJ%@|@6BT"
+nfFg!H[v.L=\&@C
+<Crf\m3v\xhwv#!
+vrL$Up]i$&.AdS3
+C/.<)<NV57jp'w~
+FBa+-.9mhKG4/zy
+<~R|l[1y!fKn*?8
+Xz]|.zy#Xpqy#TG
+^NB`7dX(DipoN\*
+s8qe"1zfAi(}vzE
+
+
+https://password.kaspersky.com/で解析かかる時間を計測した。
+上記10個のパスワードの解析にはいずれも3216世紀かかると計測された。
+パスワードの文字数を10文字にすると、「近所を散歩して帰ってくる時間」と出力されたため、15文字の文字列のパスワードを作成した。
+
+passkey
+Passkeyとは、FIDOとW3Cが共同で規格化したパスワードが不要な認証技術である。Passkeyは公開鍵暗号方式に基づいており、ウェブサイトにサインインする際は、サーバーからのチャレンジをデバイス内に保存されていた秘密鍵で署名を行い、サーバに送信する。サーバーは事前に登録されている署名に用いて、秘密鍵の対となる公開鍵で署名を検証し認証を行う。セキュリティトークンや生体認証を用いる。フィッシング攻撃に耐性があること、不正アクセスが困難であるメリットがある。
+
+Passkeyを作成し、Passkeyを使用してgoogleアカウントにログインすることができた。Passkeyを作成した画面を添付いたします。パスキーは指紋認証で行いました。
+
+

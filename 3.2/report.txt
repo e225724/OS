@@ -1,0 +1,223 @@
+sudo dtruss ls
+をMac上で実行しない。Macのせキュティーオプション、シップを切れば、実行できるかも？
+
+fedoraでstraceのスコープを広げる
+
+
+strace(システムコールの呼び出し)
+$ sudo strace /bin/ls
+execve("/bin/ls", ["/bin/ls"], 0x7ffe914a7e50 /* 15 vars */) = 0
+brk(NULL)                               = 0x560d81f9d000
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=23351, ...}, AT_EMPTY_PATH) = 0
+mmap(NULL, 23351, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f4cfe2e0000
+close(3)                                = 0
+openat(AT_FDCWD, "/lib64/libselinux.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+newfstatat(3, "", {st_mode=S_IFREG|0755, st_size=180016, ...}, AT_EMPTY_PATH) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f4cfe2de000
+mmap(NULL, 181880, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4cfe2b1000
+mmap(0x7f4cfe2b8000, 114688, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x7000) = 0x7f4cfe2b8000
+mmap(0x7f4cfe2d4000, 24576, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x23000) = 0x7f4cfe2d4000
+mmap(0x7f4cfe2da000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x29000) = 0x7f4cfe2da000
+mmap(0x7f4cfe2dc000, 5752, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f4cfe2dc000
+close(3)                                = 0
+openat(AT_FDCWD, "/lib64/libcap.so.2", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+newfstatat(3, "", {st_mode=S_IFREG|0755, st_size=36616, ...}, AT_EMPTY_PATH) = 0
+mmap(NULL, 36920, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4cfe2a7000
+mmap(0x7f4cfe2a9000, 16384, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7f4cfe2a9000
+mmap(0x7f4cfe2ad000, 8192, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x6000) = 0x7f4cfe2ad000
+mmap(0x7f4cfe2af000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x7000) = 0x7f4cfe2af000
+close(3)                                = 0
+openat(AT_FDCWD, "/lib64/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0 \203\2\0\0\0\0\0"..., 832) = 832
+pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784
+newfstatat(3, "", {st_mode=S_IFREG|0755, st_size=2811464, ...}, AT_EMPTY_PATH) = 0
+pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784
+mmap(NULL, 2366320, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4cfe000000
+mmap(0x7f4cfe026000, 1441792, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x26000) = 0x7f4cfe026000
+mmap(0x7f4cfe186000, 319488, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x186000) = 0x7f4cfe186000
+mmap(0x7f4cfe1d4000, 417792, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1d3000) = 0x7f4cfe1d4000
+mmap(0x7f4cfe23a000, 31600, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f4cfe23a000
+close(3)                                = 0
+openat(AT_FDCWD, "/lib64/libpcre2-8.so.0", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+newfstatat(3, "", {st_mode=S_IFREG|0755, st_size=632968, ...}, AT_EMPTY_PATH) = 0
+mmap(NULL, 631344, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4cfdf65000
+mmap(0x7f4cfdf68000, 450560, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x3000) = 0x7f4cfdf68000
+mmap(0x7f4cfdfd6000, 163840, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x71000) = 0x7f4cfdfd6000
+mmap(0x7f4cfdffe000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x98000) = 0x7f4cfdffe000
+close(3)                                = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f4cfe2a5000
+arch_prctl(ARCH_SET_FS, 0x7f4cfe2a5c40) = 0
+set_tid_address(0x7f4cfe2a5f10)         = 4207
+set_robust_list(0x7f4cfe2a5f20, 24)     = 0
+rseq(0x7f4cfe2a6560, 0x20, 0, 0x53053053) = 0
+mprotect(0x7f4cfe1d4000, 409600, PROT_READ) = 0
+mprotect(0x7f4cfdffe000, 4096, PROT_READ) = 0
+mprotect(0x7f4cfe2af000, 4096, PROT_READ) = 0
+mprotect(0x7f4cfe2da000, 4096, PROT_READ) = 0
+mprotect(0x560d81665000, 8192, PROT_READ) = 0
+mprotect(0x7f4cfe318000, 8192, PROT_READ) = 0
+prlimit64(0, RLIMIT_STACK, NULL, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0
+munmap(0x7f4cfe2e0000, 23351)           = 0
+prctl(PR_CAPBSET_READ, CAP_MAC_OVERRIDE) = 1
+prctl(PR_CAPBSET_READ, 0x30 /* CAP_??? */) = -1 EINVAL (Invalid argument)
+prctl(PR_CAPBSET_READ, CAP_CHECKPOINT_RESTORE) = 1
+prctl(PR_CAPBSET_READ, 0x2c /* CAP_??? */) = -1 EINVAL (Invalid argument)
+prctl(PR_CAPBSET_READ, 0x2a /* CAP_??? */) = -1 EINVAL (Invalid argument)
+prctl(PR_CAPBSET_READ, 0x29 /* CAP_??? */) = -1 EINVAL (Invalid argument)
+statfs("/sys/fs/selinux", {f_type=SELINUX_MAGIC, f_bsize=4096, f_blocks=0, f_bfree=0, f_bavail=0, f_files=0, f_ffree=0, f_fsid={val=[0, 0]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_NOSUID|ST_NOEXEC|ST_RELATIME}) = 0
+statfs("/sys/fs/selinux", {f_type=SELINUX_MAGIC, f_bsize=4096, f_blocks=0, f_bfree=0, f_bavail=0, f_files=0, f_ffree=0, f_fsid={val=[0, 0]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_NOSUID|ST_NOEXEC|ST_RELATIME}) = 0
+getrandom("\x8f\x46\x2a\x62\x5e\xa2\xa1\x6b", 8, GRND_NONBLOCK) = 8
+brk(NULL)                               = 0x560d81f9d000
+brk(0x560d81fbe000)                     = 0x560d81fbe000
+access("/etc/selinux/config", F_OK)     = 0
+openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3
+newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=2998, ...}, AT_EMPTY_PATH) = 0
+read(3, "# Locale name alias data base.\n#"..., 4096) = 2998
+read(3, "", 4096)                       = 0
+close(3)                                = 0
+openat(AT_FDCWD, "/usr/lib/locale/en_US.UTF-8/LC_IDENTIFICATION", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/locale/en_US.utf8/LC_IDENTIFICATION", O_RDONLY|O_CLOEXEC) = 3
+newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=369, ...}, AT_EMPTY_PATH) = 0
+mmap(NULL, 369, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f4cfe2e5000
+close(3)                                = 0
+openat(AT_FDCWD, "/usr/lib64/gconv/gconv-modules.cache", O_RDONLY|O_CLOEXEC) = 3
+newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=27012, ...}, AT_EMPTY_PATH) = 0
+mmap(NULL, 27012, PROT_READ, MAP_SHARED, 3, 0) = 0x7f4cfe29e000
+close(3)                                = 0
+futex(0x7f4cfe23972c, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+openat(AT_FDCWD, "/usr/lib/locale/en_US.UTF-8/LC_MEASUREMENT", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/locale/en_US.utf8/LC_MEASUREMENT", O_RDONLY|O_CLOEXEC) = 3
+newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=23, ...}, AT_EMPTY_PATH) = 0
+mmap(NULL, 23, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f4cfe2e4000
+close(3)                                = 0
+openat(AT_FDCWD, "/usr/lib/locale/en_US.UTF-8/LC_TELEPHONE", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/locale/en_US.utf8/LC_TELEPHONE", O_RDONLY|O_CLOEXEC) = 3
+newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=59, ...}, AT_EMPTY_PATH) = 0
+mmap(NULL, 59, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f4cfe2e3000
+close(3)                                = 0
+openat(AT_FDCWD, "/usr/lib/locale/en_US.UTF-8/LC_ADDRESS", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/locale/en_US.utf8/LC_ADDRESS", O_RDONLY|O_CLOEXEC) = 3
+newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=167, ...}, AT_EMPTY_PATH) = 0
+mmap(NULL, 167, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f4cfe2e2000
+close(3)                                = 0
+openat(AT_FDCWD, "/usr/lib/locale/en_US.UTF-8/LC_NAME", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/locale/en_US.utf8/LC_NAME", O_RDONLY|O_CLOEXEC) = 3
+newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=77, ...}, AT_EMPTY_PATH) = 0
+mmap(NULL, 77, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f4cfe2e1000
+close(3)                                = 0
+openat(AT_FDCWD, "/usr/lib/locale/en_US.UTF-8/LC_PAPER", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/locale/en_US.utf8/LC_PAPER", O_RDONLY|O_CLOEXEC) = 3
+newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=34, ...}, AT_EMPTY_PATH) = 0
+mmap(NULL, 34, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f4cfe2e0000
+close(3)                                = 0
+openat(AT_FDCWD, "/usr/lib/locale/en_US.UTF-8/LC_MESSAGES", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/locale/en_US.utf8/LC_MESSAGES", O_RDONLY|O_CLOEXEC) = 3
+newfstatat(3, "", {st_mode=S_IFDIR|0755, st_size=29, ...}, AT_EMPTY_PATH) = 0
+close(3)                                = 0
+openat(AT_FDCWD, "/usr/lib/locale/en_US.utf8/LC_MESSAGES/SYS_LC_MESSAGES", O_RDONLY|O_CLOEXEC) = 3
+newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=57, ...}, AT_EMPTY_PATH) = 0
+mmap(NULL, 57, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f4cfe29d000
+close(3)                                = 0
+openat(AT_FDCWD, "/usr/lib/locale/en_US.UTF-8/LC_MONETARY", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/locale/en_US.utf8/LC_MONETARY", O_RDONLY|O_CLOEXEC) = 3
+newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=286, ...}, AT_EMPTY_PATH) = 0
+mmap(NULL, 286, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f4cfe29c000
+close(3)                                = 0
+openat(AT_FDCWD, "/usr/lib/locale/en_US.UTF-8/LC_COLLATE", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/locale/en_US.utf8/LC_COLLATE", O_RDONLY|O_CLOEXEC) = 3
+newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=2586930, ...}, AT_EMPTY_PATH) = 0
+mmap(NULL, 2586930, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f4cfdc00000
+close(3)                                = 0
+openat(AT_FDCWD, "/usr/lib/locale/en_US.UTF-8/LC_TIME", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/locale/en_US.utf8/LC_TIME", O_RDONLY|O_CLOEXEC) = 3
+newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=3284, ...}, AT_EMPTY_PATH) = 0
+mmap(NULL, 3284, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f4cfe29b000
+close(3)                                = 0
+openat(AT_FDCWD, "/usr/lib/locale/en_US.UTF-8/LC_NUMERIC", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/locale/en_US.utf8/LC_NUMERIC", O_RDONLY|O_CLOEXEC) = 3
+newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=54, ...}, AT_EMPTY_PATH) = 0
+mmap(NULL, 54, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f4cfe29a000
+close(3)                                = 0
+openat(AT_FDCWD, "/usr/lib/locale/en_US.UTF-8/LC_CTYPE", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/locale/en_US.utf8/LC_CTYPE", O_RDONLY|O_CLOEXEC) = 3
+newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=357584, ...}, AT_EMPTY_PATH) = 0
+mmap(NULL, 357584, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f4cfe242000
+close(3)                                = 0
+ioctl(1, TCGETS, {c_iflag=ICRNL|IXON|IXANY|IMAXBEL|IUTF8, c_oflag=NL0|CR0|TAB0|BS0|VT0|FF0|OPOST|ONLCR, c_cflag=B9600|CS8|CREAD, c_lflag=ISIG|ICANON|ECHO|ECHOE|IEXTEN|ECHOCTL|ECHOKE|PENDIN, ...}) = 0
+ioctl(1, TIOCGWINSZ, {ws_row=24, ws_col=80, ws_xpixel=560, ws_ypixel=336}) = 0
+openat(AT_FDCWD, ".", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
+newfstatat(3, "", {st_mode=S_IFDIR|0700, st_size=95, ...}, AT_EMPTY_PATH) = 0
+getdents64(3, 0x560d81fa7860 /* 7 entries */, 32768) = 216
+getdents64(3, 0x560d81fa7860 /* 0 entries */, 32768) = 0
+close(3)                                = 0
+close(1)                                = 0
+close(2)                                = 0
+exit_group(0)                           = ?
++++ exited with 0 +++
+
+
+
+
+ltrace(ライブラリ関数の呼び出し)
+$ sudo ltrace /bin/ls
+strrchr("/bin/ls", '/')                          = "/ls"
+setlocale(LC_ALL, "")                            = "en_US.UTF-8"
+bindtextdomain("coreutils", "/usr/share/locale") = "/usr/share/locale"
+textdomain("coreutils")                          = "coreutils"
+__cxa_atexit(0x5582f50031a0, 0, 0x5582f5018ec0, 0) = 0
+getopt_long(1, 0x7fff0f116a98, "abcdfghiklmnopqrstuvw:xABCDFGHI:"..., 0x5582f5019300, -1) = -1
+getenv("LS_BLOCK_SIZE")                          = nil
+getenv("BLOCK_SIZE")                             = nil
+getenv("BLOCKSIZE")                              = nil
+getenv("POSIXLY_CORRECT")                        = nil
+getenv("BLOCK_SIZE")                             = nil
+isatty(1)                                        = 1
+ioctl(1, 21523, 0x7fff0f1168b0)                  = 0
+getenv("TABSIZE")                                = nil
+getenv("QUOTING_STYLE")                          = nil
+__errno_location()                               = 0x7f764272bae0
+malloc(56)                                       = 0x5582f510f580
+__errno_location()                               = 0x7f764272bae0
+malloc(56)                                       = 0x5582f510f5c0
+getenv("TZ")                                     = nil
+malloc(128)                                      = 0x5582f510f600
+reallocarray(0, 100, 208, 0x5582f510f600)        = 0x5582f510f690
+malloc(32)                                       = 0x5582f51147e0
+strlen(".")                                      = 1
+malloc(2)                                        = 0x5582f5114810
+__memcpy_chk(0x5582f5114810, 0x5582f5011f9b, 2, 2) = 0x5582f5114810
+__errno_location()                               = 0x7f764272bae0
+opendir(".")                                     = { 3 }
+readdir({ 3 })                                   = { 25854213, "." }
+readdir({ 3 })                                   = { 25166750, ".." }
+readdir({ 3 })                                   = { 25854214, ".bash_logout" }
+readdir({ 3 })                                   = { 25854215, ".bash_profile" }
+readdir({ 3 })                                   = { 25854216, ".bashrc" }
+readdir({ 3 })                                   = { 17428145, ".ssh" }
+readdir({ 3 })                                   = { 25861642, ".bash_history" }
+readdir({ 3 })                                   = nil
+closedir({ 3 })                                  = 0
+_setjmp(0x5582f501a340, 2, 0, 0x7f7642508f2b)    = 0
+free(0x5582f5114810)                             = <void>
+free(nil)                                        = <void>
+free(0x5582f51147e0)                             = <void>
+__fpending(0x7f76426395c0, 0, 1, 1)              = 0
+fileno(0x7f76426395c0)                           = 1
+__freading(0x7f76426395c0, 0, 1, 1)              = 0
+__freading(0x7f76426395c0, 0, 0, 1)              = 0
+fflush(0x7f76426395c0)                           = 0
+fclose(0x7f76426395c0)                           = 0
+__fpending(0x7f76426394e0, 0, 0x7f76425d7000, 0) = 0
+fileno(0x7f76426394e0)                           = 2
+__freading(0x7f76426394e0, 0, 0x7f76425d7000, 0) = 0
+__freading(0x7f76426394e0, 0, 0, 0)              = 0
+fflush(0x7f76426394e0)                           = 0
+fclose(0x7f76426394e0)                           = 0
+__cxa_finalize(0x5582f5018ec0, 7, 0, 0x7fff0f116780) = 1
++++ exited (status 0) +++

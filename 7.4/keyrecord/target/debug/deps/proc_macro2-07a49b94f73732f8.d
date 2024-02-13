@@ -1,0 +1,10 @@
+/Users/tokuyamamorimasa/Desktop/OS/7.4/keyrecord/target/debug/deps/libproc_macro2-07a49b94f73732f8.rmeta: /Users/tokuyamamorimasa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/lib.rs /Users/tokuyamamorimasa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/strnom.rs /Users/tokuyamamorimasa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/fallback.rs /Users/tokuyamamorimasa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/wrapper.rs
+
+/Users/tokuyamamorimasa/Desktop/OS/7.4/keyrecord/target/debug/deps/libproc_macro2-07a49b94f73732f8.rlib: /Users/tokuyamamorimasa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/lib.rs /Users/tokuyamamorimasa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/strnom.rs /Users/tokuyamamorimasa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/fallback.rs /Users/tokuyamamorimasa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/wrapper.rs
+
+/Users/tokuyamamorimasa/Desktop/OS/7.4/keyrecord/target/debug/deps/proc_macro2-07a49b94f73732f8.d: /Users/tokuyamamorimasa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/lib.rs /Users/tokuyamamorimasa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/strnom.rs /Users/tokuyamamorimasa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/fallback.rs /Users/tokuyamamorimasa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/wrapper.rs
+
+/Users/tokuyamamorimasa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/lib.rs:
+/Users/tokuyamamorimasa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/strnom.rs:
+/Users/tokuyamamorimasa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/fallback.rs:
+/Users/tokuyamamorimasa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/wrapper.rs:

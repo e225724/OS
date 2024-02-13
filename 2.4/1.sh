@@ -1,0 +1,1 @@
+find ~/Desktop ~/mori ~/Downloads -type f \( -name "*.c" -o -name "*.py" -o -name "*.java" -o -name "*.go" \) -exec wc {} \+

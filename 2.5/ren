@@ -1,0 +1,164 @@
+
+~/.zshrcでの設定で追加した部分です。
+export dirfile="$HOME/.who.$host.$tty"
+export dirhfile="$HOME/.who.$host"
+function pushd {
+    builtin pushd "$@"
+    echo $PWD > $dirfile
+    echo $PWD > $dirhfile
+}
+
+function popd {
+    builtin popd "$@"
+    echo $PWD > $dirfile
+    echo $PWD > $dirhfile
+}
+
+function cd {
+    builtin cd "$@"
+    echo $PWD > $dirfile
+    echo $PWD > $dirhfile
+}
+
+function phd {
+    cat $dirhfile
+}
+
+
+実行結果
+$ssh amene
++amane+e225724 cd hogehoge
++amane+e225724 tty
+/dev/pts/38
++amane+e225724 pwd
+/home/student/e22/e225724/hogehoge
++amane+e225724 exit
+Connection to amane.ie.u-ryukyu.ac.jp closed.
+$ssh amane
++amane+e225724 tty
+/dev/pts/38
++amane+e225724 pwd
+/home/student/e22/e225724/hogehoge
+
+複数ログイン結果
++amane+e225724 tty 
+/dev/pts/38
+
++amane+e225724 tty
+/dev/pts/61
+
+
+問題
+Desktop内にある全てのファイルの情報を出力するプログラムを作成せよ。
+
+使用したコード
+#!/bin/bash
+
+desktop_path="$HOME/Desktop"
+
+# デスクトップ内の全てのファイルに対して処理
+for file in "$desktop_path"/**/*
+do
+    if [ -f "$file" ]; then
+        file_type=$(file -b "$file")
+        echo "File: $file - Type: $file_type"
+    fi
+done
+
+
+実行結果
+tokuyamamorimasa@tokuyamanoMacBook-Air 2.5 % ./2-5.sh
+File: /Users/tokuyamamorimasa/Desktop/OS/1:12.mov - Type: ISO Media, Apple QuickTime movie, Apple QuickTime (.MOV/QT)
+File: /Users/tokuyamamorimasa/Desktop/OS/:zshrcのファイルの中身.docx - Type: Microsoft Word 2007+
+File: /Users/tokuyamamorimasa/Desktop/OS/O S課題ログ.docx - Type: Microsoft Word 2007+
+File: /Users/tokuyamamorimasa/Desktop/OS/O S（注意が必要なもの）.docx - Type: Microsoft Word 2007+
+File: /Users/tokuyamamorimasa/Desktop/OS/OS課題 gitlab hugo使い方.docx - Type: Microsoft Word 2007+
+File: /Users/tokuyamamorimasa/Desktop/OS/~$ S課題ログ.docx - Type: data
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/1:19.mov - Type: ISO Media, Apple QuickTime movie, Apple QuickTime (.MOV/QT)
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/画面収録 2024-01-26 12.59.51.mov - Type: ISO Media, Apple QuickTime movie, Apple QuickTime (.MOV/QT)
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2023-06-02 13.00.43.png - Type: PNG image data, 2880 x 1800, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2023-06-07 11.49.16.png - Type: PNG image data, 2880 x 1800, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2023-10-17 16.55.15.png - Type: PNG image data, 2880 x 1800, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2023-10-18 20.31.19.png - Type: PNG image data, 2880 x 1800, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2023-12-07 15.49.22.png - Type: PNG image data, 810 x 260, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2023-12-07 15.56.39.png - Type: PNG image data, 1406 x 778, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2023-12-07 21.46.57.png - Type: PNG image data, 2880 x 1800, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2023-12-13 20.51.41.png - Type: PNG image data, 2880 x 1800, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2023-12-13 20.51.56.png - Type: PNG image data, 2880 x 1800, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2023-12-13 21.04.44.png - Type: PNG image data, 2554 x 922, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2023-12-14 13.13.46.png - Type: PNG image data, 2880 x 1800, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2023-12-14 13.13.53.png - Type: PNG image data, 2880 x 1800, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2023-12-14 20.50.19.png - Type: PNG image data, 1004 x 294, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2023-12-15 0.28.06.png - Type: PNG image data, 1132 x 840, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2023-12-17 0.38.55.png - Type: PNG image data, 2880 x 1800, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2023-12-17 15.59.07.png - Type: PNG image data, 1826 x 522, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2023-12-21 15.37.41.png - Type: PNG image data, 2880 x 1800, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2023-12-22 15.34.17.png - Type: PNG image data, 2880 x 1800, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2023-12-22 16.35.04.png - Type: PNG image data, 2812 x 340, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2024-01-04 12.33.15.png - Type: PNG image data, 2880 x 1800, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2024-01-11 12.21.24.png - Type: PNG image data, 2880 x 1800, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2024-01-11 15.39.42.png - Type: PNG image data, 1440 x 150, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2024-01-11 15.45.43.png - Type: PNG image data, 1440 x 424, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2024-01-15 20.53.00.png - Type: PNG image data, 850 x 104, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2024-01-15 20.54.50.png - Type: PNG image data, 878 x 116, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2024-01-16 15.53.37.png - Type: PNG image data, 990 x 30, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/Screenshot/スクリーンショット 2024-01-22 10.42.15.png - Type: PNG image data, 416 x 276, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/過去のtex/225724G.tex - Type: LaTeX 2e document text, Unicode text, UTF-8 text, with very long lines (329)
+File: /Users/tokuyamamorimasa/Desktop/過去のtex/rep2-225724G.textClipping - Type: Apple binary property list
+File: /Users/tokuyamamorimasa/Desktop/過去のtex/rep3.tex - Type: LaTeX 2e document text, Unicode text, UTF-8 text
+File: /Users/tokuyamamorimasa/Desktop/人工知能/6cfcf3a057c92d6b.pdf - Type: PDF document, version 1.3
+File: /Users/tokuyamamorimasa/Desktop/人工知能/report6.pdf - Type: PDF document, version 1.3
+File: /Users/tokuyamamorimasa/Desktop/人工知能/report多層NN.docx - Type: Microsoft Word 2007+
+File: /Users/tokuyamamorimasa/Desktop/人工知能/report多層NN.pdf - Type: PDF document, version 1.3, 2 pages
+File: /Users/tokuyamamorimasa/Desktop/人間関係論/23火の3,4人間関係論・学童期の発達＃7.doc - Type: Composite Document File V2 Document, Little Endian, Os: Windows, Version 10.0, Code page: 932, Title: P, Author: �q, Template: Normal, Last Saved By: �q �, Revision Number: 2, Name of Creating Application: Microsoft Office Word, Total Editing Time: 02:00, Create Time/Date: Mon Dec  4 10:08:00 2023, Last Saved Time/Date: Mon Dec  4 10:08:00 2023, Number of Pages: 3, Number of Words: 285, Number of Characters: 1629, Security: 0
+File: /Users/tokuyamamorimasa/Desktop/人間関係論/23火の3、4人間関係論・思春期の発達＃8.doc - Type: Composite Document File V2 Document, Little Endian, Os: MacOS, Version 5.13, Code page: -535, Title: ��������親����������身������������武��, Author: ��, Template: Normal.dotm, Last Saved By: 渡�山��正, Revision Number: 3, Name of Creating Application: Microsoft Office Word, Total Editing Time: 09:00, Last Printed: Mon Nov 14 13:39:00 2022, Create Time/Date: Mon Dec  4 10:09:00 2023, Last Saved Time/Date: Wed Dec  6 11:38:00 2023, Number of Pages: 4, Number of Words: 433, Number of Characters: 2473, Security: 0
+File: /Users/tokuyamamorimasa/Desktop/人間関係論/23火の３,４人間関係論＃7.pdf - Type: PDF document, version 1.7, 3 pages
+File: /Users/tokuyamamorimasa/Desktop/人間関係論/23火の３,４人間関係論＃7.xlsx - Type: Microsoft Excel 2007+
+File: /Users/tokuyamamorimasa/Desktop/人間関係論/23火の３、４人間関係論＃8.pdf - Type: PDF document, version 1.7, 2 pages
+File: /Users/tokuyamamorimasa/Desktop/人間関係論/23火の３、４人間関係論＃8.xls - Type: Composite Document File V2 Document, Little Endian, Os: MacOS, Version 5.13, Code page: 10001, Author: Ikuko, Last Saved By: nvR@��, Name of Creating Application: Microsoft Macintosh Excel, Total Editing Time: Thu Jan  1 08:59:59 1970, Last Printed: Wed Apr 22 15:29:27 2020, Create Time/Date: Sun Apr 15 21:33:28 2012, Last Saved Time/Date: Wed Dec  6 11:37:56 2023, Number of Pages: 0, Number of Words: 0, Number of Characters: 0, Security: 0
+File: /Users/tokuyamamorimasa/Desktop/人間関係論/人間関係論 課題3.pdf - Type: PDF document, version 1.3, 3 pages
+File: /Users/tokuyamamorimasa/Desktop/人間関係論/発達障害図説.docx - Type: Microsoft Word 2007+
+File: /Users/tokuyamamorimasa/Desktop/人間関係論/人間関係論＃10.pdf - Type: PDF document, version 1.7, 2 pages
+File: /Users/tokuyamamorimasa/Desktop/人間関係論/人間関係論＃10.xls - Type: Composite Document File V2 Document, Little Endian, Os: MacOS, Version 5.13, Code page: 10001, Author: Ikuko, Last Saved By: nvR@��, Name of Creating Application: Microsoft Macintosh Excel, Total Editing Time: Thu Jan  1 08:59:59 1970, Last Printed: Mon Dec 13 23:37:30 2021, Create Time/Date: Sun Apr 15 21:33:28 2012, Last Saved Time/Date: Sun Jan 14 01:57:27 2024, Number of Pages: 0, Number of Words: 0, Number of Characters: 0, Security: 0
+File: /Users/tokuyamamorimasa/Desktop/人間関係論/人間関係論＃7.pdf - Type: PDF document, version 1.7, 3 pages
+File: /Users/tokuyamamorimasa/Desktop/人間関係論/人間関係論課題3.docx - Type: Microsoft Word 2007+
+File: /Users/tokuyamamorimasa/Desktop/人間関係論/人間関係論＃１０.docx - Type: Microsoft Word 2007+
+File: /Users/tokuyamamorimasa/Desktop/人間関係論/人間関係論　補講WS①.pdf - Type: PDF document, version 1.3, 2 pages
+File: /Users/tokuyamamorimasa/Desktop/人間関係論/人間関係論　補講WS①.xls - Type: Composite Document File V2 Document, Little Endian, Os: MacOS, Version 5.13, Code page: 10001, Author: Ikuko, Last Saved By: nvR@��, Name of Creating Application: Microsoft Macintosh Excel, Total Editing Time: Thu Jan  1 08:59:59 1970, Last Printed: Tue Jan  5 04:03:06 2021, Create Time/Date: Sun Apr 15 21:33:28 2012, Last Saved Time/Date: Wed Jan 24 16:54:14 2024, Number of Pages: 0, Number of Words: 0, Number of Characters: 0, Security: 0
+File: /Users/tokuyamamorimasa/Desktop/人間関係論/人間関係論　補講①.docx - Type: Microsoft Word 2007+
+File: /Users/tokuyamamorimasa/Desktop/人間と物理学/cff65acb232b8ef0.pdf - Type: PDF document, version 1.7 (zip deflate encoded)
+File: /Users/tokuyamamorimasa/Desktop/人間と物理学/期末レポート.docx - Type: Microsoft Word 2007+
+File: /Users/tokuyamamorimasa/Desktop/人間と物理学/期末レポート.pdf - Type: PDF document, version 1.3, 5 pages
+File: /Users/tokuyamamorimasa/Desktop/人間と物理学/期末レポート２.pdf - Type: PDF document, version 1.3, 5 pages
+File: /Users/tokuyamamorimasa/Desktop/ソフトウェア開発/B14休学.pdf - Type: PDF document, version 1.7, 1 pages
+File: /Users/tokuyamamorimasa/Desktop/ソフトウェア開発/PDF.docx - Type: Microsoft Word 2007+
+File: /Users/tokuyamamorimasa/Desktop/ソフトウェア開発/PDF.pdf - Type: PDF document, version 1.3, 1 pages
+File: /Users/tokuyamamorimasa/Desktop/ソフトウェア開発/PowerAppsの作成方法.docx - Type: Microsoft Word 2007+
+File: /Users/tokuyamamorimasa/Desktop/ソフトウェア開発/kougakukyu.pdf - Type: PDF document, version 1.7, 1 pages
+File: /Users/tokuyamamorimasa/Desktop/ソフトウェア開発/test.docx - Type: Microsoft Word 2007+
+File: /Users/tokuyamamorimasa/Desktop/ソフトウェア開発/~$休学.pdf - Type: data
+File: /Users/tokuyamamorimasa/Desktop/ソフトウェア開発/練習.docx - Type: Microsoft Word 2007+
+File: /Users/tokuyamamorimasa/Desktop/ソフトウェア開発/ちゅらhp課題.zip - Type: Zip archive data, at least v1.0 to extract, compression method=store
+File: /Users/tokuyamamorimasa/Desktop/ソフトウェア開発/チーム活動を通して得た学びに関するレポート.docx - Type: Microsoft Word 2007+
+File: /Users/tokuyamamorimasa/Desktop/ソフトウェア開発/チーム活動を通して得た学びに関するレポート.pdf - Type: PDF document, version 1.3, 2 pages
+File: /Users/tokuyamamorimasa/Desktop/知能情報基礎演習Ⅲ/AI Builder Dataset 2023-10-19 11-25-50.docx - Type: Microsoft Word 2007+
+File: /Users/tokuyamamorimasa/Desktop/情報ネットワークⅡ/GNS3-WebClient-pack - Type: MacOS Alias file
+File: /Users/tokuyamamorimasa/Desktop/知能情報基礎演習Ⅲ/Logisim-ITA.jar - Type: Zip archive data, at least v1.0 to extract, compression method=deflate
+File: /Users/tokuyamamorimasa/Desktop/知能情報基礎演習Ⅲ/PowerAppsの作成方法.docx - Type: Microsoft Word 2007+
+File: /Users/tokuyamamorimasa/Desktop/知能情報基礎演習Ⅳ/RainData.zip - Type: Zip archive data, at least v1.0 to extract, compression method=store
+File: /Users/tokuyamamorimasa/Desktop/情報ネットワークⅡ/ipall.png - Type: PNG image data, 1262 x 322, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/情報ネットワークⅡ/mac.png - Type: PNG image data, 1268 x 250, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/情報ネットワークⅡ/mac1.png - Type: PNG image data, 1396 x 32, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/情報ネットワークⅡ/macall.png - Type: PNG image data, 1402 x 316, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/知能情報基礎演習Ⅳ/operate.txt - Type: Unicode text, UTF-8 text
+File: /Users/tokuyamamorimasa/Desktop/情報ネットワークⅡ/proall.png - Type: PNG image data, 1260 x 310, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/情報ネットワークⅡ/showip.png - Type: PNG image data, 564 x 358, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/情報ネットワークⅡ/第６回授業資料.pdf - Type: PDF document, version 1.7, 22 pages
+File: /Users/tokuyamamorimasa/Desktop/情報ネットワークⅡ/スクリーンショット 2023-10-26 15.08.25.png - Type: PNG image data, 2880 x 1800, 8-bit/color RGBA, non-interlaced
+File: /Users/tokuyamamorimasa/Desktop/データベースシステム/okinawa.csv - Type: CSV text
+File: /Users/tokuyamamorimasa/Desktop/データベースシステム/okiwana2.csv - Type: CSV text
+File: /Users/tokuyamamorimasa/Desktop/データベースシステム/１.csv - Type: CSV text
+File: /Users/tokuyamamorimasa/Desktop/データベースシステム/操作方法 - Type: Unicode text, UTF-8 text
+File: /Users/tokuyamamorimasa/Desktop/データベースシステム/総務省統計局都道府県転入転出動態_DBシステム用データ.csv - Type: CSV text
+File: /Users/tokuyamamorimasa/Desktop/データベースシステム/総務省統計局都道府県転入転出動態_DBシステム用データ.xls - Type: Composite Document File V2 Document, Little Endian, Os: Windows, Version 10.0, Code page: 932, Author: ITR NGY, Last Saved By: ITR NGY, Last Printed: Sun Jan 29 03:27:28 2006, Create Time/Date: Wed Jan  8 22:48:59 1997, Last Saved Time/Date: Thu Nov 16 06:54:35 2023, Security: 0
+File: /Users/tokuyamamorimasa/Desktop/コンピュータアーキテクチャ/~$課題2.docx - Type: data
