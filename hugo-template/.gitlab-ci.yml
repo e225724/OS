@@ -1,0 +1,18 @@
+# This file is a template, and might need editing before it works on your project.
+---
+# All available Hugo versions are listed here:
+# https://gitlab.com/pages/hugo/container_registry
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+stages:
+  - test
+
+deployToHugo:
+  stage: test
+  script:
+  - hugo
+  - rsync -rlptvzP public/ syskan@christina.ie.u-ryukyu.ac.jp:/mnt/cephfs/ie-web/ie/hugo-template
+  - rm -rf public
+  only:
+  - master

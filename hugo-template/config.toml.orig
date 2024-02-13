@@ -1,0 +1,10 @@
+languageCode = "ja"
+defaultContentLanguage = "ja"
+hasCJKLanguage = true
+baseurl = "https://ie.u-ryukyu.ac.jp/hugo-template/"  # Include trailing slash
+title = "Hugo-Template"
+copyright = "Copyright © 2021-2021"
+# canonifyurls = true
+drafts = false
+paginate = 10
+theme = "ananke"
