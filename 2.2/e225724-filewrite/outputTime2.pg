@@ -1,0 +1,16 @@
+set term svg
+set output "./img/time_graph2.svg"
+
+set title "Elapsed Time vs. File Size"
+set xlabel "File Size"
+set ylabel "Elapsed Time(ns)"
+
+set xrange [0:9000]
+set yrange [0:1e6]
+
+set key left top
+
+plot "./data/64_time.log" using 2:1 with lines title "Buffer Size: 64", \
+     "./data/512_time.log" using 2:1 with lines title "Buffer Size: 512", \
+     "./data/4096_time.log" using 2:1 with lines title "Buffer Size: 4096", \
+     "./data/32768_time.log" using 2:1 with lines title "Buffer Size: 32768"
